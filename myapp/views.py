@@ -17,6 +17,15 @@ from datetime import timedelta
 from django.utils import timezone
 
 from imgurpython import ImgurClient
+from clarifai.rest import ClarifaiApp
+app = ClarifaiApp(api_key='a99bf262d52544b0b91f3f988632ad92')
+
+model = app.models.get('food-items-v1.0')
+response = model.predict_by_url(url='https://www.elementstark.com/woocommerce-extension-demos/wp-content/uploads/sites/2/2016/12/pizza.jpg')
+
+print response
+
+
 
 # Create your views here.
 
@@ -105,6 +114,15 @@ def post_view(request):
             client = ImgurClient('aa3db23d2decdf7', 'e92fe5945d42d60ceb640cb5a618d19eb170d38b')
             post.image_url = client.upload_from_path(path, anon=True)['link']
             post.save()
+            clarifai_data = []
+            app = ClarifaiApp(api_key='a99bf262d52544b0b91f3f988632ad92')  # Covers all scopes
+            model = app.models.get("general-v1.3")
+            result = model.predict_by_url(url=post.image_url)
+            for x in range(0, len(result['outputs'][0]['data']['concepts'])):
+                model = result['outputs'][0]['data']['concepts'][x]['name']
+                clarifai_data.append(model)
+            for z in range(0, len(clarifai_data)):
+                print clarifai_data[z]
             return redirect('/feed/')
         else:
           form = PostForm()
