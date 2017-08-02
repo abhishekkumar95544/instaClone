@@ -13,6 +13,7 @@ import uuid
 
 class UserModel(models.Model):
       email = models.EmailField();
+      name = models.CharField(max_length=120,default='')
       username = models.CharField(max_length=120)
       password = models.CharField(max_length=40)
       created_on = models.DateTimeField(auto_now_add=True)
@@ -36,6 +37,7 @@ class PostModel(models.Model):
   caption = models.CharField(max_length=240)
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
+  has_liked = False
 
 
   @property
