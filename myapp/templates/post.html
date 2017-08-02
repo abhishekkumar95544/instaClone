@@ -2,24 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>post</title>
 </head>
-<body STYLE="background-color:red; text-align:center; color:blue; font-family: helvetica;">>
-<form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
+<style>
+body {
+     text-align:center;
+     background: green;
+}
+    input[type="submit"] {
+           background: red;
+            color:white;
+            border: 0px;
+            font-size: smaller;
+            border-radius: 15%;
+            font-size: 18px;
+            padding: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-right: 16px;
+}
+       h1 {
+            color: firebrick;
+            font-size: 55px;
+ }
+        input[type="text"] {
+            font-size: smaller;
+            width: 250px;
+            height: 25px;
+            background: khaki;
+            border: 0px;
+            padding: 10px 10px 10px 10px;
+            margin-bottom: 10px;
+  }
+          label {
+            color: #B61493;
+            font-size: 20px;
+            color: chocolate;
+            padding: 10px 10px 10px 10px;
+   }
+</style>
+<body>
 
-        {{ form.as_p }}
-        <div>
-            <label for="image">Image: </label>
-            <input id="image" type="file" name="image" accept="image/*" value={{ image }}>
-        </div>
-        <div>
-            <label for="caption">Caption: </label>
-            <input id="caption" type="text" name="image" value={{ caption }}>
-        </div>
 
-        <input type="submit" class="btn btn-default" value="Post">
-</form>
-</>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+         <h1>Posting an image</h1>
+         {{ form }}
+      <input type="submit" class="btn btn-default" value="Add a picture">
+   </form>
+</body>
 </html>
 
